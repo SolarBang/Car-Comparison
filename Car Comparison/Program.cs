@@ -21,7 +21,6 @@ namespace Car_Comparison
             public Car()
             {
                 Console.WriteLine("Car Created!"); // verify the car has been created.
-                
             }
             
             
@@ -29,6 +28,66 @@ namespace Car_Comparison
 
         class ParkingLot // stores data of cars we are working with.
         {
+            public void Menu()
+            {
+                //List menu options
+                Console.WriteLine("The menu options are as follows");
+                Console.WriteLine("1: List Vehicles By Year");
+                Console.WriteLine("2: List Vehicles By Model");
+                Console.WriteLine("3: List Vehicles By Price");
+                Console.WriteLine("4: List Vehicles By Best Value");
+                Console.WriteLine("5: Show Fuel Consumption for each car over a given distance (miles)");
+                Console.WriteLine("6: Show our randomly featured car");
+                Console.WriteLine("7: Show the average MPG per year of all the cars in the lot");
+                Console.WriteLine("8: Exit"); //not sure if there's a better way to exit other than having nothing left to compute in main method
+                try
+                {
+                    Console.WriteLine("\nWhich optionn would you like?"); //ask user for menu selection
+                    int x = int.Parse(Console.ReadLine()); //need to add a try catch method or switch back to integer
+                    Directory(x);
+                }
+                catch
+                {
+                    Console.WriteLine("Please use numbers!\n");
+                    Menu(); // go back to main menu
+                }
+            }
+
+            public void Directory(int x) //This is a directory of all menu options and switches associated, if you add function be sure to add a case
+            {
+                switch(x)
+                {
+                    case 1:
+                        Console.WriteLine("You have selected 1");
+                        ListVehiclesByYear();
+                        break;
+                    case 2:
+                        Console.WriteLine("You have selected 2");
+                        ListVehiclesByModel();
+                        break;
+                    case 3:
+                        Console.WriteLine("You have selected 3");
+                        ListVehiclesByPrice();
+                        break;
+                    case 4:
+                        Console.WriteLine("You have selected 4");
+                        ListVehiclesByBestValue();
+                        break;
+                    case 5:
+                        Console.WriteLine("You have selected 5");
+                        GetMilage();
+                        break;
+                    case 6:
+                        Console.WriteLine("You have selected 6");
+                        RandomCar();
+                        break;
+                    case 7:
+                        Console.WriteLine("You have selected 2");
+                        YearlyAverageMPG();
+                        break;
+                }
+            }
+
             public List<Car> Cars;
 
             public ParkingLot()
@@ -74,6 +133,7 @@ namespace Car_Comparison
                 {
                     Console.WriteLine($"Make: {car.Make} Model: {car.Model} Year: {car.Year}"); // format we are writing out the car info in the list
                 }
+                Menu(); // go back to main menu
             }
 
             public void ListVehiclesByModel() // method to list vehicle models form A-Z
@@ -85,6 +145,7 @@ namespace Car_Comparison
                 {
                     Console.WriteLine($"Model: {car.Model}"); // format we are writing out the car info in the list
                 }
+                Menu(); // go back to main menu
             }
 
             public void ListVehiclesByPrice() // method to list cars by price
@@ -96,6 +157,7 @@ namespace Car_Comparison
                 {
                     Console.WriteLine($"Make: {car.Make} Model: {car.Model} Year: {car.Year} Price: ${car.Price}"); // format we are writing out the car info in the list
                 }
+                Menu(); // go back to main menu
             }
 
             public void ListVehiclesByBestValue() // method to list cars by best value
@@ -107,6 +169,7 @@ namespace Car_Comparison
                 {
                     Console.WriteLine($"Make: {car.Make} Model: {car.Model} Year: {car.Year} Price: ${car.Price}"); // format we are writing out the car info in the list
                 }
+                Menu(); // go back to main menu
             }
 
             public void GetMilage()
@@ -134,6 +197,7 @@ namespace Car_Comparison
                     var fuelconsumption = Math.Round((x / car.MPG), 2); // added a variable to contain fuel consumption so i could adjust the formatting / precision as int's couldn't go under 1, and floats / doubles are too long by default. looks messy
                     Console.WriteLine($"The {car.Model} will use {fuelconsumption} Gallons of fuel.");
                 }
+                Menu(); // go back to main menu
             }
 
             public void RandomCar() // method to pick a random car
@@ -142,6 +206,7 @@ namespace Car_Comparison
                 var chosenIndex = random.Next(Cars.Count);
                 var ChosenCar = Cars[chosenIndex];
                 Console.WriteLine($"\nTodays randomly featured car is the {ChosenCar.Model}! \n");
+                Menu(); // go back to main menu
 
             }
 
@@ -162,6 +227,7 @@ namespace Car_Comparison
                 {
                     Console.WriteLine($"Year: {LookupYear.Year} - {LookupYear.AverageMPG} Average MPG");
                 }
+                Menu(); // go back to main menu
 
             }
         }
@@ -175,6 +241,8 @@ namespace Car_Comparison
 
             Console.WriteLine("Cars are done parking  \n");
 
+            MarinerParkingLot.Menu(); // go to main menu
+            /*
             MarinerParkingLot.ListVehiclesByYear(); // to call function to list vehicles by year (newest)
             
             MarinerParkingLot.ListVehiclesByModel(); // to call function to list vehicles from A - Z by model
@@ -188,8 +256,8 @@ namespace Car_Comparison
             MarinerParkingLot.RandomCar(); // to call function to call a random vehicle
 
             MarinerParkingLot.YearlyAverageMPG(); // to call function to list vehicles and fuel consumption based on use defined milage
-
-
+            */
+            //Console.ReadLine(); //put at the end to keep the console window up so you can see the rest of the results.
         }
     }
 }
